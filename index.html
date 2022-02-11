@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Paul Hartono">
+  <title>Badminton Costing</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/checkout/">
+
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+
+  <!-- Custom styles for this template -->
+  <link href="form-validation.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+  <div class="container">
+    <main>
+      <div class="py-5 text-center">
+        <!-- <img class="d-block mx-auto mb-4" src="assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
+        <h2>Badminton Cost Calculator</h2>
+        <p class="lead"></p>
+      </div>
+
+      <div class="row g-5 justify-content-md-center">
+
+        <div class="col-md-7 col-lg-8">
+
+          <form id='form-calculator' class="needs-validation" novalidate>
+            <div class="row g-3">
+
+              <div class="col-12">
+                <label for="court-cost" class="form-label">Court Cost</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text">$</span>
+                  <input type="text" class="form-control" id="court-cost" placeholder="total court cost" required>
+                  <div class="invalid-feedback">
+                    Enter total court cost
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="players" class="form-label">Players</label>
+                <input type="text" class="form-control" id="players" placeholder="number of players" required>
+                <div class="invalid-feedback">
+                  Please enter number of players
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <label for="shuttles" class="form-label">Used Shuttles</label>
+                <input type="text" class="form-control" id="shuttles" placeholder="total used shuttles" required>
+                <div class="invalid-feedback">
+                  Please enter total used shuttles
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <label for="tube-cost" class="form-label">Tube Cost</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text">$</span>
+                  <input type="text" class="form-control" id="tube-cost" placeholder="cost per tube" value="33"
+                    required>
+                  <div class="invalid-feedback">
+                    Enter shuttles cost per tube
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <label for="shuttles-per-tube" class="form-label">Shuttles per tube</label>
+                <div class="input-group has-validation">
+                  <input type="text" class="form-control" id="shuttles-per-tube"
+                    placeholder="number of shuttles per tube" value="12" required>
+                  <div class="invalid-feedback">
+                    number of shuttles per tube
+                  </div>
+                </div>
+              </div>
+
+
+
+              <hr class="my-4">
+
+              <button class="w-100 btn btn-primary btn-lg" type="submit"
+                onclick="return calculate();">Calculate</button>
+          </form>
+
+          <div class="row g-3 justify-content-md-center">
+
+            <div id="result-box" class="card text-center bg-secondary text-white" style="width: 18rem; display: none;">
+              <div class="card-body">
+                <h3 class="card-title">$ <span id="cost-pp"></span></h3>
+                <p class="card-text">per person</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+      <p class="mb-1">&copy; 2022 Baddy Dev</p>
+
+    </footer>
+  </div>
+
+
+  <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="form-validation.js"></script>
+
+  <script>
+    function calculate() {
+      var courtCost = document.getElementById('court-cost')
+      var numPlayers = document.getElementById('players')
+      var numUsedShuttles = document.getElementById('shuttles')
+      var tubeCost = document.getElementById('tube-cost')
+      var numShuttlesPerTube = document.getElementById('shuttles-per-tube')
+
+      if (courtCost.value.trim() == '' ||
+        numPlayers.value.trim() == '' ||
+        numUsedShuttles.value.trim() == '' ||
+        tubeCost.value.trim() == '' ||
+        numShuttlesPerTube.value.trim() == '') {
+        return
+      }
+
+      var costPerShuttle = tubeCost.value / numShuttlesPerTube.value
+      console.info('costPerShuttle = ', costPerShuttle)
+
+      var usedShuttlesCost = numUsedShuttles.value * costPerShuttle
+      console.info('usedShuttlesCost = ', usedShuttlesCost)
+
+      var totalExpenses = +courtCost.value + +usedShuttlesCost
+      console.info('totalExpenses = ', totalExpenses)
+
+      var costPerPerson = totalExpenses / numPlayers.value
+      console.info('costPerPerson = ', costPerPerson)
+
+      var costPerPersonElement = document.getElementById('cost-pp')
+      costPerPersonElement.innerHTML = Math.round((costPerPerson + Number.EPSILON) * 100) / 100
+
+      var resultBoxElement = document.getElementById('result-box')
+      resultBoxElement.style.display = ''
+
+      return false
+    }
+  </script>
+</body>
+
+</html>
