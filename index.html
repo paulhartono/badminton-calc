@@ -57,7 +57,7 @@
                 <label for="court-cost" class="form-label">Court Cost</label>
                 <div class="input-group has-validation">
                   <span class="input-group-text">$</span>
-                  <input type="text" class="form-control" id="court-cost" placeholder="total court cost" required>
+                  <input type="number" class="form-control" id="court-cost" placeholder="total court cost" required>
                   <div class="invalid-feedback">
                     Enter total court cost
                   </div>
@@ -66,7 +66,7 @@
 
               <div class="col-12">
                 <label for="players" class="form-label">Players</label>
-                <input type="text" class="form-control" id="players" placeholder="number of players" required>
+                <input type="number" class="form-control" id="players" placeholder="number of players" required>
                 <div class="invalid-feedback">
                   Please enter number of players
                 </div>
@@ -74,7 +74,7 @@
 
               <div class="col-sm-4">
                 <label for="shuttles" class="form-label">Used Shuttles</label>
-                <input type="text" class="form-control" id="shuttles" placeholder="total used shuttles" required>
+                <input type="number" class="form-control" id="shuttles" placeholder="total used shuttles" required>
                 <div class="invalid-feedback">
                   Please enter total used shuttles
                 </div>
@@ -84,7 +84,7 @@
                 <label for="tube-cost" class="form-label">Tube Cost</label>
                 <div class="input-group has-validation">
                   <span class="input-group-text">$</span>
-                  <input type="text" class="form-control" id="tube-cost" placeholder="cost per tube" value="33"
+                  <input type="number" class="form-control" id="tube-cost" placeholder="cost per tube" value="33"
                     required>
                   <div class="invalid-feedback">
                     Enter shuttles cost per tube
@@ -95,7 +95,7 @@
               <div class="col-sm-4">
                 <label for="shuttles-per-tube" class="form-label">Shuttles per tube</label>
                 <div class="input-group has-validation">
-                  <input type="text" class="form-control" id="shuttles-per-tube"
+                  <input type="number" class="form-control" id="shuttles-per-tube"
                     placeholder="number of shuttles per tube" value="12" required>
                   <div class="invalid-feedback">
                     number of shuttles per tube
@@ -111,7 +111,7 @@
                 onclick="return calculate();">Calculate</button>
           </form>
 
-          <div class="row g-3 justify-content-md-center">
+          <div class="row g-3 justify-content-center">
 
             <div id="result-box" class="card text-center bg-secondary text-white" style="width: 18rem; display: none;">
               <div class="card-body">
@@ -119,6 +119,7 @@
                 <p class="card-text">per person</p>
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -168,6 +169,8 @@
 
       var resultBoxElement = document.getElementById('result-box')
       resultBoxElement.style.display = ''
+
+      window.location.href = '#result-box';
 
       return false
     }
