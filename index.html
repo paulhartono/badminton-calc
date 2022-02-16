@@ -138,15 +138,16 @@
             <div class="modal-body">
 
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="contact-name" placeholder="name">
+                <input type="text" class="form-control" id="contact-name" placeholder="name" name="name">
                 <label for="contact-name">Name</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="contact-email" placeholder="enter your email address">
+                <input type="email" class="form-control" id="contact-email" name="email"
+                  placeholder="enter your email address">
                 <label for="contact-email">Email address</label>
               </div>
               <div class="form-floating">
-                <textarea class="form-control" placeholder="Leave your message" id="contact-message"
+                <textarea class="form-control" placeholder="Leave your message" name="message" id="contact-message"
                   style="height: 100px"></textarea>
                 <label for="contact-message">Message</label>
               </div>
@@ -154,7 +155,7 @@
             </div>
             <div class="modal-footer">
               <button type="reset" class="btn btn-secondary" type="reset">Reset</button>
-              <button type="button" class="btn btn-primary">Send</button>
+              <button type="submit" class="btn btn-primary">Send</button>
             </div>
           </form>
         </div>
