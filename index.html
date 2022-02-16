@@ -116,9 +116,51 @@
     </main>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
-      <p class="mb-1">&copy; 2022 Baddy Dev</p>
 
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-sm btn-outline-dark" data-bs-toggle="modal" data-bs-target="#contactModal">
+        &copy; JEDLIE.DEV
+      </button>
     </footer>
+
+
+    <!-- Vertically centered scrollable modal -->
+    <div class="modal fade" id="contactModal" aria-labelledby="contactModalLabel" aria-hidden="true" tabindex="-1"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Contact</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form method="post" name="contact" netlify-honeypot="mandatory-field" data-netlify-recaptcha="true"
+            data-netlify="true">
+            <div class="modal-body">
+
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="contact-name" placeholder="name">
+                <label for="contact-name">Name</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="contact-email" placeholder="enter your email address">
+                <label for="contact-email">Email address</label>
+              </div>
+              <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave your message" id="contact-message"
+                  style="height: 100px"></textarea>
+                <label for="contact-message">Message</label>
+              </div>
+              <div data-netlify-recaptcha="true"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="reset" class="btn btn-secondary" type="reset">Reset</button>
+              <button type="button" class="btn btn-primary">Send</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 
