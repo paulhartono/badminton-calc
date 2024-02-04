@@ -45,21 +45,6 @@
           <div class="col-md-7 col-lg-8">
             <form id="form-calculator" class="needs-validation" novalidate>
               <div class="row g-3">
-                <div class="col-6">
-                  <label for="court-cost" class="form-label">Court Cost</label>
-                  <div class="input-group has-validation">
-                    <span class="input-group-text">$</span>
-                    <input type="number" class="form-control form-control-lg" id="court-cost" required />
-                    <div class="invalid-feedback">Enter total court cost</div>
-                  </div>
-                </div>
-
-                <div class="col-6">
-                  <label for="players" class="form-label">Players</label>
-                  <input type="number" class="form-control form-control-lg" id="players" required />
-                  <div class="invalid-feedback">Please enter number of players</div>
-                </div>
-
                 <div class="col-4">
                   <label for="shuttles" class="form-label"># Shuttles</label>
                   <input type="number" class="form-control form-control-lg" id="shuttles" required />
@@ -94,7 +79,7 @@
               <div class="row g-3">
                 <div class="col-4">
                   <label for="shuttles" class="form-label"># Shuttles 2</label>
-                  <input type="number" class="form-control form-control-lg" id="shuttles2" required />
+                  <input type="number" class="form-control form-control-lg" id="shuttles2" />
                   <div class="invalid-feedback">Please enter total used shuttles</div>
                 </div>
 
@@ -108,7 +93,6 @@
                       id="tube-cost2"
                       value=""
                       aria-label="Tube Cost"
-                      required
                     />
                     <span class="input-group-text">per</span>
                     <input
@@ -117,9 +101,46 @@
                       id="shuttles-per-tube2"
                       value="12"
                       aria-label="Tube Shuttles"
-                      required
                     />
                   </div>
+                </div>
+              </div>
+
+              <hr class="my-4" />
+
+              <h4 class="mb-3">Hourly Rate</h4>
+
+              <div class="row g-3">
+                <div class="col-4">
+                  <label for="court-cost" class="form-label">Total Court Cost</label>
+                  <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control form-control-lg" id="court-cost" required />
+                    <div class="invalid-feedback">Enter total court cost</div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <label for="players-spent-total-hours" class="form-label"># Players</label>
+                  <input type="number" class="form-control form-control-lg" id="players-spent-total-hours" required />
+                  <div class="invalid-feedback">Please enter players spending the whole sessions</div>
+                </div>
+                <div class="col-4">
+                  <label for="total-hours" class="form-label">Total Hours</label>
+                  <input type="number" class="form-control form-control-lg" id="total-hours" required />
+                  <div class="invalid-feedback">Please enter total hours</div>
+                </div>
+              </div>
+
+              <div class="row g-3 pt-3">
+                <div class="col-6">
+                  <label for="total-hours" class="form-label">Custom Hours</label>
+                  <input type="number" class="form-control form-control-lg" id="custom-hours" />
+                  <div class="invalid-feedback">Please enter total hours</div>
+                </div>
+                <div class="col-6">
+                  <label for="players-spent-total-hours" class="form-label"># Players (Custom)</label>
+                  <input type="number" class="form-control form-control-lg" id="players-spent-custom-hours" />
+                  <div class="invalid-feedback">Please enter players spending custom hours</div>
                 </div>
               </div>
 
@@ -138,7 +159,10 @@
               >
                 <div class="card-body">
                   <h3 class="card-title">$ <span id="cost-pp"></span></h3>
-                  <p class="card-text">per person</p>
+                  <p class="card-text">per person spending full hours</p>
+
+                  <h3 class="card-title">$ <span id="cost-pp-custom-hours"></span></h3>
+                  <p class="card-text">per person spending custom hours</p>
                 </div>
               </div>
             </div>
@@ -229,9 +253,16 @@
         var tubeCost2 = document.getElementById('tube-cost2')
         var numShuttlesPerTube2 = document.getElementById('shuttles-per-tube2')
 
+        var totalHours = document.getElementById('total-hours')
+        var numPlayersSpentTotalHours = document.getElementById('players-spent-total-hours')
+
+        var customHours = document.getElementById('custom-hours')
+        var numPlayersSpentCustomHours = document.getElementById('players-spent-custom-hours')
+
         if (
           courtCost.value.trim() == '' ||
-          numPlayers.value.trim() == '' ||
+          numPlayersSpentTotalHours.value.trim() == '' ||
+          totalHours.value.trim() == '' ||
           numUsedShuttles.value.trim() == '' ||
           tubeCost.value.trim() == '' ||
           numShuttlesPerTube.value.trim() == ''
@@ -254,11 +285,36 @@
         var totalExpenses = +courtCost.value + +usedShuttlesCost + +usedShuttlesCost2
         console.info('totalExpenses = ', totalExpenses)
 
-        var costPerPerson = totalExpenses / numPlayers.value
-        console.info('costPerPerson = ', costPerPerson)
+        var totalExpensesPerHour = totalExpenses / +totalHours.value
+        console.info('totalExpensesPerHour = ', totalExpensesPerHour)
+
+        var totalPlayers = +numPlayersSpentTotalHours.value + +numPlayersSpentCustomHours.value
+        console.info('numPlayersSpentTotalHours = ', numPlayersSpentTotalHours.value)
+        console.info('numPlayersSpentCustomHours = ', numPlayersSpentCustomHours.value)
+        console.info('totalPlayers = ', totalPlayers)
+
+        var totalExpensesForPeopleSpendingCustomHours = totalExpensesPerHour * +customHours.value
+        console.info('totalExpensesForPeopleSpendingCustomHours = ', totalExpensesForPeopleSpendingCustomHours)
+        var costPerPersonSpendingCustomHours = totalExpensesForPeopleSpendingCustomHours / totalPlayers
+        console.info('costPerPersonSpendingCustomHours = ', costPerPersonSpendingCustomHours)
+
+        var totalHoursLessCustomHours = +totalHours.value - +customHours.value
+        console.info('totalHoursLessCustomHours = ', totalHoursLessCustomHours)
+
+        var totalExpensesLessCustomHours = totalHoursLessCustomHours * totalExpensesPerHour
+        console.info('totalExpensesLessCustomHours = ', totalExpensesLessCustomHours)
+
+        var costPerPersonLessCustomHours = totalExpensesLessCustomHours / +numPlayersSpentTotalHours.value
+        console.info('costPerPersonLessCustomHours = ', costPerPersonLessCustomHours)
+        var costPerPersonSpendingTotalHours = costPerPersonLessCustomHours + costPerPersonSpendingCustomHours
+        console.info('costPerPersonSpendingTotalHours = ', costPerPersonSpendingTotalHours)
 
         var costPerPersonElement = document.getElementById('cost-pp')
-        costPerPersonElement.innerHTML = Math.round((costPerPerson + Number.EPSILON) * 100) / 100
+        costPerPersonElement.innerHTML = Math.round((costPerPersonSpendingTotalHours + Number.EPSILON) * 100) / 100
+
+        var costPerPersonSpendingCustomHoursElement = document.getElementById('cost-pp-custom-hours')
+        costPerPersonSpendingCustomHoursElement.innerHTML =
+          Math.round((costPerPersonSpendingCustomHours + Number.EPSILON) * 100) / 100
 
         var resultBoxElement = document.getElementById('result-box')
         resultBoxElement.style.display = ''
