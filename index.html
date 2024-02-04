@@ -1,213 +1,272 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Paul Hartono" />
+    <title>Badminton Costing</title>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="Paul Hartono">
-  <title>Badminton Costing</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/checkout/" />
 
-  <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/checkout/">
+    <!-- Bootstrap core CSS -->
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-
-
-  <!-- Bootstrap core CSS -->
-  <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
       }
-    }
-  </style>
 
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
 
-  <!-- Custom styles for this template -->
-  <link href="form-validation.css" rel="stylesheet">
-</head>
+    <!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet" />
+  </head>
 
-<body class="bg-light">
+  <body class="bg-light">
+    <div class="container px-4">
+      <main>
+        <div class="py-5 text-center">
+          <!-- <img class="d-block mx-auto mb-4" src="assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
+          <h2>Badminton Cost Calculator</h2>
+          <p class="lead"></p>
+        </div>
 
-  <div class="container px-4">
-    <main>
-      <div class="py-5 text-center">
-        <!-- <img class="d-block mx-auto mb-4" src="assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
-        <h2>Badminton Cost Calculator</h2>
-        <p class="lead"></p>
-      </div>
+        <div class="row g-5 justify-content-md-center">
+          <div class="col-md-7 col-lg-8">
+            <form id="form-calculator" class="needs-validation" novalidate>
+              <div class="row g-3">
+                <div class="col-6">
+                  <label for="court-cost" class="form-label">Court Cost</label>
+                  <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control form-control-lg" id="court-cost" required />
+                    <div class="invalid-feedback">Enter total court cost</div>
+                  </div>
+                </div>
 
-      <div class="row g-5 justify-content-md-center">
+                <div class="col-6">
+                  <label for="players" class="form-label">Players</label>
+                  <input type="number" class="form-control form-control-lg" id="players" required />
+                  <div class="invalid-feedback">Please enter number of players</div>
+                </div>
 
-        <div class="col-md-7 col-lg-8">
+                <div class="col-4">
+                  <label for="shuttles" class="form-label"># Shuttles</label>
+                  <input type="number" class="form-control form-control-lg" id="shuttles" required />
+                  <div class="invalid-feedback">Please enter total used shuttles</div>
+                </div>
 
-          <form id='form-calculator' class="needs-validation" novalidate>
-            <div class="row g-3">
+                <div class="col-8">
+                  <label for="tube-cost" class="form-label">Tube Cost</label>
+                  <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input
+                      type="number"
+                      class="form-control form-control-lg"
+                      id="tube-cost"
+                      value=""
+                      aria-label="Tube Cost"
+                      required
+                    />
+                    <span class="input-group-text">per</span>
+                    <input
+                      type="number"
+                      class="form-control form-control-lg"
+                      id="shuttles-per-tube"
+                      value="12"
+                      aria-label="Tube Shuttles"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="row g-3">
+                <div class="col-4">
+                  <label for="shuttles" class="form-label"># Shuttles 2</label>
+                  <input type="number" class="form-control form-control-lg" id="shuttles2" required />
+                  <div class="invalid-feedback">Please enter total used shuttles</div>
+                </div>
 
-              <div class="col-6">
-                <label for="court-cost" class="form-label">Court Cost</label>
-                <div class="input-group has-validation">
-                  <span class="input-group-text">$</span>
-                  <input type="number" class="form-control form-control-lg" id="court-cost" required>
-                  <div class="invalid-feedback">
-                    Enter total court cost
+                <div class="col-8">
+                  <label for="tube-cost" class="form-label">Tube Cost 2</label>
+                  <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input
+                      type="number"
+                      class="form-control form-control-lg"
+                      id="tube-cost2"
+                      value=""
+                      aria-label="Tube Cost"
+                      required
+                    />
+                    <span class="input-group-text">per</span>
+                    <input
+                      type="number"
+                      class="form-control form-control-lg"
+                      id="shuttles-per-tube2"
+                      value="12"
+                      aria-label="Tube Shuttles"
+                      required
+                    />
                   </div>
                 </div>
               </div>
 
-              <div class="col-6">
-                <label for="players" class="form-label">Players</label>
-                <input type="number" class="form-control form-control-lg" id="players" required>
-                <div class="invalid-feedback">
-                  Please enter number of players
+              <hr class="my-4" />
+
+              <button class="w-100 btn btn-primary btn-lg" type="submit" onclick="return calculate();">
+                Calculate
+              </button>
+            </form>
+
+            <div class="row g-3 justify-content-center">
+              <div
+                id="result-box"
+                class="card text-center bg-secondary text-white"
+                style="width: 18rem; display: none; margin-top: 3rem"
+              >
+                <div class="card-body">
+                  <h3 class="card-title">$ <span id="cost-pp"></span></h3>
+                  <p class="card-text">per person</p>
                 </div>
-              </div>
-
-              <div class="col-4">
-                <label for="shuttles" class="form-label">Used Shuttles</label>
-                <input type="number" class="form-control form-control-lg" id="shuttles" required>
-                <div class="invalid-feedback">
-                  Please enter total used shuttles
-                </div>
-              </div>
-
-
-
-              <div class="col-8">
-                <label for="tube-cost" class="form-label">Tube Cost</label>
-                <div class="input-group has-validation">
-                  <span class="input-group-text">$</span>
-                  <input type="number" class="form-control form-control-lg" id="tube-cost" value=""
-                    aria-label="Tube Cost" required>
-                  <span class="input-group-text">per</span>
-                  <input type="number" class="form-control form-control-lg" id="shuttles-per-tube" value="12"
-                    aria-label="Tube Shuttles" required>
-                </div>
-              </div>
-
-
-              <hr class="my-4">
-
-              <button class="w-100 btn btn-primary btn-lg" type="submit"
-                onclick="return calculate();">Calculate</button>
-          </form>
-
-          <div class="row g-3 justify-content-center">
-
-            <div id="result-box" class="card text-center bg-secondary text-white" style="width: 18rem; display: none;">
-              <div class="card-body">
-                <h3 class="card-title">$ <span id="cost-pp"></span></h3>
-                <p class="card-text">per person</p>
               </div>
             </div>
-
           </div>
         </div>
-      </div>
-    </main>
+      </main>
 
-    <footer class="my-5 pt-5 text-muted text-center text-small">
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-sm btn-outline-dark" data-bs-toggle="modal" data-bs-target="#contactModal">
+          &copy; JEDLIE.DEV
+        </button>
+      </footer>
 
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-sm btn-outline-dark" data-bs-toggle="modal" data-bs-target="#contactModal">
-        &copy; JEDLIE.DEV
-      </button>
-    </footer>
-
-
-    <!-- Vertically centered scrollable modal -->
-    <div class="modal fade" id="contactModal" aria-labelledby="contactModalLabel" aria-hidden="true" tabindex="-1"
-      aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Contact</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <!-- Vertically centered scrollable modal -->
+      <div
+        class="modal fade"
+        id="contactModal"
+        aria-labelledby="contactModalLabel"
+        aria-hidden="true"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Contact</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form
+              method="post"
+              name="contact"
+              netlify-honeypot="mandatory-field"
+              data-netlify-recaptcha="true"
+              data-netlify="true"
+            >
+              <div class="modal-body">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="contact-name" placeholder="name" name="name" />
+                  <label for="contact-name">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="contact-email"
+                    name="email"
+                    placeholder="enter your email address"
+                  />
+                  <label for="contact-email">Email address</label>
+                </div>
+                <div class="form-floating">
+                  <textarea
+                    class="form-control"
+                    placeholder="Leave your message"
+                    name="message"
+                    id="contact-message"
+                    style="height: 100px"
+                  ></textarea>
+                  <label for="contact-message">Message</label>
+                </div>
+                <div data-netlify-recaptcha="true"></div>
+              </div>
+              <div class="modal-footer">
+                <button type="reset" class="btn btn-secondary" type="reset">Reset</button>
+                <button type="submit" class="btn btn-primary">Send</button>
+              </div>
+            </form>
           </div>
-          <form method="post" name="contact" netlify-honeypot="mandatory-field" data-netlify-recaptcha="true"
-            data-netlify="true">
-            <div class="modal-body">
-
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="contact-name" placeholder="name" name="name">
-                <label for="contact-name">Name</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="contact-email" name="email"
-                  placeholder="enter your email address">
-                <label for="contact-email">Email address</label>
-              </div>
-              <div class="form-floating">
-                <textarea class="form-control" placeholder="Leave your message" name="message" id="contact-message"
-                  style="height: 100px"></textarea>
-                <label for="contact-message">Message</label>
-              </div>
-              <div data-netlify-recaptcha="true"></div>
-            </div>
-            <div class="modal-footer">
-              <button type="reset" class="btn btn-secondary" type="reset">Reset</button>
-              <button type="submit" class="btn btn-primary">Send</button>
-            </div>
-          </form>
         </div>
       </div>
     </div>
 
-  </div>
+    <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script src="form-validation.js"></script>
 
-  <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function calculate() {
+        var courtCost = document.getElementById('court-cost')
+        var numPlayers = document.getElementById('players')
+        var numUsedShuttles = document.getElementById('shuttles')
+        var tubeCost = document.getElementById('tube-cost')
+        var numShuttlesPerTube = document.getElementById('shuttles-per-tube')
 
-  <script src="form-validation.js"></script>
+        var numUsedShuttles2 = document.getElementById('shuttles2')
+        var tubeCost2 = document.getElementById('tube-cost2')
+        var numShuttlesPerTube2 = document.getElementById('shuttles-per-tube2')
 
-  <script>
-    function calculate() {
-      var courtCost = document.getElementById('court-cost')
-      var numPlayers = document.getElementById('players')
-      var numUsedShuttles = document.getElementById('shuttles')
-      var tubeCost = document.getElementById('tube-cost')
-      var numShuttlesPerTube = document.getElementById('shuttles-per-tube')
+        if (
+          courtCost.value.trim() == '' ||
+          numPlayers.value.trim() == '' ||
+          numUsedShuttles.value.trim() == '' ||
+          tubeCost.value.trim() == '' ||
+          numShuttlesPerTube.value.trim() == ''
+        ) {
+          return
+        }
 
-      if (courtCost.value.trim() == '' ||
-        numPlayers.value.trim() == '' ||
-        numUsedShuttles.value.trim() == '' ||
-        tubeCost.value.trim() == '' ||
-        numShuttlesPerTube.value.trim() == '') {
-        return
+        var costPerShuttle = tubeCost.value / numShuttlesPerTube.value
+        console.info('costPerShuttle = ', costPerShuttle)
+
+        var usedShuttlesCost = numUsedShuttles.value * costPerShuttle
+        console.info('usedShuttlesCost = ', usedShuttlesCost)
+
+        var costPerShuttle2 = tubeCost2.value / numShuttlesPerTube2.value
+        console.info('costPerShuttle2 = ', costPerShuttle2)
+
+        var usedShuttlesCost2 = numUsedShuttles2.value * costPerShuttle2
+        console.info('usedShuttlesCost2 = ', usedShuttlesCost2)
+
+        var totalExpenses = +courtCost.value + +usedShuttlesCost + +usedShuttlesCost2
+        console.info('totalExpenses = ', totalExpenses)
+
+        var costPerPerson = totalExpenses / numPlayers.value
+        console.info('costPerPerson = ', costPerPerson)
+
+        var costPerPersonElement = document.getElementById('cost-pp')
+        costPerPersonElement.innerHTML = Math.round((costPerPerson + Number.EPSILON) * 100) / 100
+
+        var resultBoxElement = document.getElementById('result-box')
+        resultBoxElement.style.display = ''
+
+        window.location.href = '#result-box'
+
+        return false
       }
-
-      var costPerShuttle = tubeCost.value / numShuttlesPerTube.value
-      console.info('costPerShuttle = ', costPerShuttle)
-
-      var usedShuttlesCost = numUsedShuttles.value * costPerShuttle
-      console.info('usedShuttlesCost = ', usedShuttlesCost)
-
-      var totalExpenses = +courtCost.value + +usedShuttlesCost
-      console.info('totalExpenses = ', totalExpenses)
-
-      var costPerPerson = totalExpenses / numPlayers.value
-      console.info('costPerPerson = ', costPerPerson)
-
-      var costPerPersonElement = document.getElementById('cost-pp')
-      costPerPersonElement.innerHTML = Math.round((costPerPerson + Number.EPSILON) * 100) / 100
-
-      var resultBoxElement = document.getElementById('result-box')
-      resultBoxElement.style.display = ''
-
-      window.location.href = '#result-box';
-
-      return false
-    }
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>
